@@ -1,0 +1,19 @@
+#include <Wire.h>
+
+void setup() {
+  Wire.begin();
+  Serial.begin(9600);
+  Serial.println("Scanning I2C addresses...");
+  
+  for (int addr = 1; addr < 127; addr++) {
+    Wire.beginTransmission(addr);
+    if (Wire.endTransmission() == 0) {
+      Serial.print("Found OLED at: 0x");
+      Serial.println(addr, HEX);
+    }
+  }
+}
+
+void loop() {}
+
+//Common addresses: 0x3C or 0x3D
